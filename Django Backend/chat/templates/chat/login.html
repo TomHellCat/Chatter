@@ -1,0 +1,21 @@
+{% extends 'chat/header.html' %}
+{% load static %}
+{% block content %}
+<div id="main">
+    <article class="post featured">
+        
+        <header class="major">
+            
+            <h2>Login</h2>
+        </header>
+          <form method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit">Login</button>
+        </form>
+        Don't have an account? <a href="/register" target="blank"><strong>register here</strong></a>
+
+    </article>
+</div>  
+
+{% endblock %}  
