@@ -27,30 +27,12 @@ class Home extends Component {
     getActiveRoomName = (active,roomName) =>{
       this.active = active;
       this.roomName = roomName;
-      console.log(active);
-      console.log(roomName);
       this.setState({ active: active, roomName:roomName });
 
     }
     handleClick = (active,roomName) =>{
-     /* console.log(e.target.id);
-      if(this.active != e.target.id){
-
-        let activeItem = document.getElementById(this.active);
-        if(activeItem)
-          activeItem.className = "collection-item";
-        console.log(e);
-        this.active = e.target.id;
-        e.target.className = "collection-item active";
-        console.log(this.active);
-      }*/
-      
       this.roomName = roomName;
-
       this.active = active;
-      console.log(this.active);
-      console.log(this.roomName);
-
     }
 
     renderChatBox = (data,username,roomName) =>{

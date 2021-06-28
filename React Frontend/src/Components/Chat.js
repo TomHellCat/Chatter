@@ -1,8 +1,8 @@
 import React, {useEffect, useState, useRef} from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Chats from './Chats'
-import { withRouter } from "react-router-dom";  // new import 
-import { connect } from "react-redux";          // new import 
+import { withRouter } from "react-router-dom";  
+import { connect } from "react-redux";         
 import PropTypes from "prop-types";
 import { useAxiosGet } from '../Hooks/HttpRequests'  
 import axios from 'axios'
@@ -11,19 +11,14 @@ import axios from 'axios'
 function Chat(props) {
     const fref = useRef();
     
-    
-
     const handleClick = (id) =>{
       let room = document.getElementById("create_room").value;
-      console.log(room);
-      console.log(id);
       fref.current.setFromOutside(room,id);
     }
 
     const postRoomData = (e) =>{
 
       let roomName = document.getElementById("create_room").value;
-      console.log(roomName);
       document.getElementById("create_room").value = "";
       const url = 'http://127.0.0.1:8000/api/v1/create/';
       axios.post(url, {
@@ -31,7 +26,6 @@ function Chat(props) {
         user: props.username
       })
       .then((response) => {
-        console.log(response);
         if(response.statusText == "OK"){
           handleClick(response.data.id);
         }

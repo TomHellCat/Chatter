@@ -6,7 +6,6 @@ import WebSocketInstance from '../websocket';
 function ChatBox(props){
 
     let active = props.active;
-    console.log(active);
     let chat = null;
     let chatSocket = null;
 
@@ -21,7 +20,6 @@ function ChatBox(props){
             }));
         }
         messageInputDom.value = '';
-        console.log(message);
     }
 
     const Welcome = (data) =>{
@@ -89,7 +87,6 @@ function ChatBox(props){
             } else {
                 alert('The message is empty!');
             }
-            //scrollToBottom();  
         };
       }
     }, [active]);

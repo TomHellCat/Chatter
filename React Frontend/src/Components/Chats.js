@@ -6,14 +6,10 @@ import axios from 'axios'
 function Chats(props,ref){
     const url = 'http://127.0.0.1:8000/api/v1/chats'
     var chats = [];
-     chats  = useAxiosGet(url)
+    chats  = useAxiosGet(url)
     let active = props.active;
     let roomName = props.roomName;
-    console.log(active);
-    let isSearch = false;
 
-
-    
     const divHandler = (e) =>{
         var nodes = Array.prototype.slice.call( e.currentTarget.children );
         console.log(e.target.id);
@@ -26,8 +22,6 @@ function Chats(props,ref){
             console.log(e.target.text);
             props.handleClick(e.target.id,e.target.text);
         }
-        
-        
     }
     let content =  <div className="collection" id="chats-collection" onClick={divHandler}></div>
     
@@ -63,7 +57,6 @@ function Chats(props,ref){
                     //links.onClick = props.handleClick;
                     collectionDiv.appendChild(links);
                })
-               isSearch = false;
             }, (error) => {
                 console.log(error);
             });
@@ -86,47 +79,30 @@ function Chats(props,ref){
                 links.id = data.id;
                 links.innerText = data.name;
                 links.href = "#";
-                
                 collectionDiv.appendChild(links);
 
            }) 
-           isSearch = true; 
         }
     }
 
     useImperativeHandle(ref, () => ({
     setFromOutside (room,id) {
-      console.log(room);
-      /*let collectionDiv = document.getElementById("chats-collection");
-      let button = document.createElement("a");
-      button.className = "collection-item";
-      button.onClick = props.handleClick;
-      button.id = id;
-      button.innerText = room;
-      button.href = "#";
-      collectionDiv.appendChild(button);*/
-      chats.data.push({"id":id,"name":room});
-
        let collectionDiv = document.getElementById("chats-collection");
             collectionDiv.innerHTML = "";
+            chats.data.map(function(data, index){
+            let links = document.createElement("a");
+            links.className = "collection-item";
+            links.onClick = props.handleClick;
+            links.id = data.id;
+            links.innerText = data.name;
+            links.href = "#";
+            collectionDiv.appendChild(links);
 
-           /* chats.data.map(function(data, index){
-
-                let links = document.createElement("a");
-                links.className = "collection-item";
-                links.onClick = props.handleClick;
-                links.id = data.id;
-                links.innerText = data.name;
-                links.href = "#";
-                
-                collectionDiv.appendChild(links);
-
-           }) */
+           })
     }
   }), [chats])
 
   if(chats.data){
-
          content = 
         <div className="collection" id="chats-collection" onClick={divHandler}>
               {chats.data.map(function(data, index){
